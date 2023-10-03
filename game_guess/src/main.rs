@@ -10,11 +10,12 @@ fn main() {
 
     //call the stdin function form the io module
     io::stdin().read_line(&mut guessed_num) // append at the end without overwriting. &:reference, no copy. &mut: mutable ref
-    .expect("Failed to read the input number...");// error handling: Result value - Err and Ok
+    .expect("Failed to read the input number...");// error handling: Result value - Err and Ok. Result value returned from read_line()
    
     println!("Your guessed number is {guessed_num}");
 
     // then we need a random number
-    //push test
+    //add rand crate in Cargo.toml
+    use rand::Rng;//import random - Rng trait
     
 }
