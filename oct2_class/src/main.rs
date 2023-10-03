@@ -3,7 +3,7 @@
 
 //unit type: return type
 fn return_unit_type(){
-    
+    // can't have semicolon here, semicolon discard the unit return type
 }
 
 fn main() ->() {
