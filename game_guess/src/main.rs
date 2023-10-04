@@ -16,6 +16,8 @@ fn main() {
 
     // then we need a random number
     //add rand crate in Cargo.toml
-    use rand::Rng;//import random - Rng trait
-    
+    use rand::Rng;//import
+    let secret_num = rand::thread_rng().gen_range(1..=100);
+    println!("The secret number is ", secret_num);
+
 }
