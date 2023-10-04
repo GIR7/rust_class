@@ -77,7 +77,20 @@ fn main() {
     let s = tup.0;
     println!("{s}");//500
 
-    //array
+    //array - the number of elements will not need to change.
+    let months = ["January", "February", "March", "April", "May", "June", "July",
+              "August", "September", "October", "November", "December"];
+
+    let a: [i32; 5] = [1, 2, 3, 4, 5]; //i32 type, 5 elements
+
+    //when using semicolon
+    //b will contain 5 elements that will all be set to the value 3
+    let b = [3; 5];//same as b = a = [3, 3, 3, 3, 3];
+
+    //indexing arr
+    let aa = [1, 2, 3, 4, 5];
+    let first = aa[0];
+    let second = aa[1];
 
 
 
