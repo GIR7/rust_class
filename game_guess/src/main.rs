@@ -34,7 +34,7 @@ fn main() {
         {//then match gets the Ordering::Greater value and starts checking each arm’s pattern. 
             Ordering::Less => println!("Too small"),//not match skip, to next line
             Ordering::Greater => println!("Too large!"),//matches, excute the print - match ends
-            Ordering::Equal => println!("Bingo "),
+            Ordering::Equal => {println!("Bingo "); break;}
         }
     }
 
