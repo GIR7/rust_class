@@ -20,14 +20,16 @@ fn main() {
         //call the stdin function form the io module
         io::stdin().read_line(&mut guessed_num) // append at the end without overwriting. &:reference, no copy. &mut: mutable ref
         .expect("Failed to read the input number...");// error handling: Result value - Err and Ok. Result value returned from read_line()
-    
-        println!("Your guessed number is {guessed_num}");
 
         //we need add a new line below for comparison
         //var reuse - when you want to convert a value from one type to another type.
-        let guessed_num:u32 = guessed_num.trim()//get rid of whitespace in a string
+        let guessed_num:u32 = match guessed_num.trim()//get rid of whitespace in a string
                                         .parse()//type convert: in this case - u32
-                                        .expect("Please type a number");// result handling
+                                        {
+                                            Ok(num)=>num, Err(_)=>continue,
+                                        };// result handling - using match, if parse returns Ok, then it's num, then match will return num to assign
+                                        
+        println!("Your guessed number is {guessed_num}");
         //now camparing the guessed number and secret number
         use std::cmp::Ordering;//import- the Ordering type is another enum and has the variants Less, Greater, and Equal. These are the three outcomes that are possible when you compare two values.
         match guessed_num.cmp(&secret_num) // the cmp wil return ex. Ordering::Greater
