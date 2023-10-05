@@ -1,3 +1,8 @@
+//! Command-line modular exponentation tool
+//! Takes in 3 args throught command line and return the results
+//! 
+//! Yihui Tian 10/4/2023
+
 use std::process;
 
 fn main() {
@@ -5,12 +10,18 @@ fn main() {
    println!("res is {}", res)
 }
 
+/// Performs modular exponentiation.
+///
+/// Given three values x, y, and m, this function calculates (x^y) % m.
+/// It returns the result as a u64 value.
 fn modexp(x:u64, y:u64, m:u64) -> u64 {
     
     //convert to u128 for calculation:
     let mut x = u128::from(x);
     let mut y = u128::from(y);
     let m = u128::from(m);
+
+    //define return val
     let mut res = 1;
 
     if m == 0 {
@@ -34,6 +45,7 @@ fn modexp(x:u64, y:u64, m:u64) -> u64 {
 }
 
 #[test]
+/// Assert testing for function modexp()
   fn test_modexp() {
       // Largest prime less than 2**64.
       // https://primes.utm.edu/lists/2small/0bit.html
