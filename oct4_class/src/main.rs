@@ -11,16 +11,28 @@ enum Pointlike{
 }
 
 fn main() {
-    let mut v = Vec::new();
-    v.resize(10000,0);
-    v[5] = 125;
-    //how do be sure which type gets back? 
-    //- pattern match
-    let s = match sum(v){
-        Pointlike::Point_1D(x) =>x,
-        Pointlike::Point_2D(p) =>p.x+p.y,
+    let c = 'y';
+    println!("char c is  {}", c);
+
+    //uni code: 0x1f490.
+    //from_u32: converts u32 to char, it returns Option<char>
+    match char::from_u32(0x1f490){
+        Some(v) => println!(" {}", v),
+        None => println!(" Nah"),
     };
-    println!("Sum is {}", s);
+    println!(" {}", '💐');
+    println!(" {:x}", '💐' as u32);
+
+    // let mut v = Vec::new();
+    // v.resize(10000,0);
+    // v[5] = 125;
+    // //how do be sure which type gets back? 
+    // //- pattern match
+    // let s = match sum(v){
+    //     Pointlike::Point_1D(x) =>x,
+    //     Pointlike::Point_2D(p) =>p.x+p.y,
+    // };
+    // println!("Sum is {}", s);
 
     // let mut v = Vec::new();
     // v.resize(10000,0);
