@@ -5,13 +5,28 @@ struct Point{
     y: u64,
 }
 
+enum Pointlike{
+    Point_1D(u64),
+    Point_2D(Point),
+}
+
 fn main() {
     let mut v = Vec::new();
     v.resize(10000,0);
     v[5] = 125;
-    let s = sum(v);
-    println!("{}",s.x+s.y);
+    //how do be sure which type gets back? 
+    //- pattern match
+    let s = match sum(v){
+        Pointlike::Point_1D(x) =>x,
+        Pointlike::Point_2D(p) =>p.x+p.y,
+    };
+    println!("Sum is {}", s);
 
+    // let mut v = Vec::new();
+    // v.resize(10000,0);
+    // v[5] = 125;
+    // let s = sum(v);
+    // println!("{}",s.x+s.y);
 
 //    let mut v = Vec::new();// creates mem on the heap
 //    // vec is resizeable 
@@ -33,14 +48,24 @@ fn main() {
     // println!("Sum is {}", res);
 }
 
-//struct
-fn sum(v: Vec<u64>) -> Point{
+//enum
+fn sum(v: Vec<u64>) -> Pointlike{
     let mut total = 0;
     for x in v{
         total += x;
     }
-    Point{x:total, y:total}
+    Pointlike::Point_1D(total)
 }
+
+
+//struct
+// fn sum(v: Vec<u64>) -> Point{
+//     let mut total = 0;
+//     for x in v{
+//         total += x;
+//     }
+//     Point{x:total, y:total}
+// }
 
 //Vec - <T>
 // fn sum(v: Vec<u64>) -> u64{
