@@ -10,7 +10,36 @@ enum Pointlike{
     Point_2D(Point),
 }
 
+fn str_show(s:String){
+    println!(" string s : {}", s);
+}
+
+//by ref that it wounld consume the string object
+//fn str_ref_show(s:&String){
+fn str_ref_show(s:&str){
+    println!(" string s : {}", s);
+}
+
 fn main() {
+    //rust is a owned object - gets consumed at the end of function
+    //has a static lifetime
+    let s = "💐";//it's constent(imuttable)-UTF8 is stored in program memery
+    println!(" string s : {}", s);
+
+    let mut S:String = "💐".to_string();//value type string - produced by allocating the space on the heap for the UTF8 and copying the stuff form read only membry 
+    //S += "!";
+    S.push('!');
+    println!("{}", S); //string can't be inxed by integer
+    println!("{}", S.chars().nth(1).unwrap());
+
+    
+    str_ref_show(&S);
+    println!("{}", S);
+    str_ref_show("!!");
+
+    str_show(S);//S gets consumed after this line   
+    //println!("{}", S);//can't use S again
+    
     let c = 'y';
     println!("char c is  {}", c);
 
