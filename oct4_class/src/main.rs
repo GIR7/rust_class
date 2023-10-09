@@ -3,12 +3,15 @@
 
 
 fn main() {
-   let mut v = Vec::new();
+   let mut v = Vec::new();// creates mem on the heap
    // vec is resizeable 
    //increase the size of the Vec to 10,000 elements, with the new elements set to 0.
    v.resize(10000,0);//mem is on hte heap
    v[5] = 125;
-   let s = sum(v);
+   let res = sum(v);// mem are gone at the end of the sum() funciton, CAN'T (access the mem)do v[7] after tis line
+   println!("Sum is {}", res);
+
+
 //    println!("{}",s.x+s.y);
     //1000 elements value - 0
     // let mut arr = [0;1_000];//mem is living on the stack
@@ -20,9 +23,13 @@ fn main() {
     // println!("Sum is {}", res);
 }
 
-
+//Vec - <T>
 fn sum(v: Vec<u64>) -> u64{
-    
+    let mut t = 0;
+    for x in v{
+        t += x;
+    }
+    t
 }
 // fn sum(v: [u64;1_000]) -> u64{
 //     let mut total = 0;
