@@ -12,17 +12,28 @@ all mem gets freed once func returned
 fn main() {
     //Vec allocate on the heap
    let mut v = Vec::new(); 
-   v.push(1);
-
+   //v.push(1);
+   v.push(S(1));
    sum(v);//sum has the ownership of the v, freed after this line
 }
 
-fn sum(vec:Vec<u8>){//vec of bytes
-    let res = 0;
+fn sum(vec: &[S;2]){//vec of bytes
+    let mut res = &S(0);
     for i in vec{//bytes in the vec are copy types, iterator makes copy of vec
         res+=i;
     }
     println!("{}" ,res);// res is on the stack
-
-    //vec gets freed at the end of this func
+    
 }
+
+// fn sum(vec:Vec<u8>){//vec of bytes
+//     let mut res = 0;
+//     for i in vec{//bytes in the vec are copy types, iterator makes copy of vec
+//         res+=i;
+//     }
+//     println!("{}" ,res);// res is on the stack
+//     // println!("{:?}" ,vec);
+//     //vec gets freed at the end of this func
+// }
+
+struct S(u8);
