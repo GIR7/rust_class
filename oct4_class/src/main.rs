@@ -10,6 +10,28 @@ enum Pointlike{
     Point_2D(Point),
 }
 
+
+//ownership - 
+//a ref/pointer - borrowed in rust
+/* 
+fn bang(s: &str) -> &str{
+    let mut ss = s.to_string();
+    ss.push('!');
+    //ss is the var living on the stack, gets freed when the function is retured. &ss is the points the freed mem
+    //&ss//can't not return the local var, A reference to data owned by hte current function
+}
+Fix:*/
+// fn bang(s: &str) -> String{
+//     let mut ss = s.to_string();
+//     ss.push('!');
+//     ss
+// }
+//efficient fix: String type is living on the heap, can .push()
+fn bang(s: &mut String) -> &str{
+    s.push('!');
+    s
+}
+
 fn str_show(s:String){
     println!(" string s : {}", s);
 }
@@ -51,6 +73,15 @@ fn main() {
     };
     println!(" {}", '💐');
     println!(" {:x}", '💐' as u32);
+
+    let mut v = "💐".to_string();
+   
+    // println!("bang:{}", bang(&s));
+     println!("bang:{}", bang(&mut v));
+    let r = bang(&mut v);
+   // drop(v);// can't move v, is later borrowed by r
+    println!("bangbang:{}",r);
+
 
     // let mut v = Vec::new();
     // v.resize(10000,0);
