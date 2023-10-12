@@ -9,6 +9,15 @@ use std::cell::RefCell;
     }
 
 fn main() {
+    /*Rust Generics
+Parameters of kind "type"
+Most commonly single capital letter (can be camel-case)
+Can parameterize a datatype, function or impl (examples/top.rs)
+Turbofish supplies explicit type parameters t.update::<u32>(&0); -- complier can't infer what type*/
+ 
+ // Fails to compile bc mistype.
+    //let s: u64 = [1u32, 2, 3].iter().cloned().sum();
+
     //pattern matching
     /*
     Two kinds: "refutable" and "irrefutable"
@@ -38,7 +47,7 @@ fn main() {
     }
     println!("{}",p.x);
 
-    
+
     //enum
     /* 
     pub enum Option<T> {
