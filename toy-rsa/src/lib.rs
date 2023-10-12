@@ -14,9 +14,7 @@ pub fn genkey() -> (u32, u32){
         let q = u64::from(q);
         let lambda = lcm(p-1,q-1);
         if EXP < lambda && gcd(EXP,lambda)==1{
-            let p: u32 = u32::try_from(p).unwrap();
-            let q: u32 = u32::try_from(q).unwrap();
-            return (p,q);// function returns a (u32,u32)
+            return (p.try_into().unwrap(),q.try_into().unwrap());// function returns a (u32,u32)
         }
     }
 }
