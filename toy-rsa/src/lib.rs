@@ -33,8 +33,20 @@ pub fn encrypt(key: u64, msg: u32) -> u64{
 
 /// Decrypt the cipertext `msg` using the RSA private `key`
 /// and return the resulting plaintext.
-pub fn decrypt(key: (u32, u32), msg: u64) {
+pub fn decrypt(key: (u32, u32), msg: u64) ->u32 {
+    let (p,q) = key;
+    let p = u64::from(p);//converts to u64 for lcm function
+    let q = u64::from(q);
+    //Calculate 𝜆(p, q) for RSA
+    let lambda = lcm(p-1,q-1);
     
+    // Calculate d as the modular inverse of E mod 𝜆(p, q)
+    let d = modinverse(EXP,lambda );
+
+    //Calculate msg^d mod (p * q)
+    let decrypted_msg = modexp(msg, d, u64::from(p) * u64::from(q));//returns a u64
+
+    decrypted_msg as u32
 }
 
 
@@ -45,16 +57,18 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_help_function() {
-        let p: u64 = 7;
-        let q: u64 = 11;
-        // Expected result
-        let expected_result: u64 = 30;  // LCM of (7 - 1) and (11 - 1) = LCM(6, 10) = 30
-
-        // Call the help function
-        let result = helper(p, q);
-
-        // Assert that the result matches the expected value
-        assert_eq!(result, expected_result);
+    fn test_rsa_encryption_decryption() {
+        // Generate a key pair
+        let key = genkey();
+        // Original message to be encrypted
+        let original_msg: u32 = 12345;
+    
+        // Encrypt the message
+        let encrypted_msg = encrypt(u64::from(key.0)*u64::from(key.1), original_msg);
+        // Decrypt the message
+        let decrypted_msg = decrypt(key, encrypted_msg);
+    
+        // Check if the decrypted message matches the original message
+        assert_eq!(decrypted_msg, original_msg);
     }
 }
