@@ -9,6 +9,10 @@ use std::cell::RefCell;
     }
 
 fn main() {
+    //error handling return type -Option , Result
+    //tbc...
+
+
     /*Rust Generics
 Parameters of kind "type"
 Most commonly single capital letter (can be camel-case)
