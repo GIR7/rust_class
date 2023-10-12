@@ -20,18 +20,22 @@ pub fn genkey() -> (u32, u32){
 }
 
 
-// /// Encrypt the plaintext `msg` using the RSA public `key`
-// /// and return the ciphertext.
-// pub fn encrypt(key: u64, msg: u32) -> u64{
+/// Encrypt the plaintext `msg` using the RSA public `key`
+/// and return the ciphertext.
+pub fn encrypt(key: u64, msg: u32) -> u64{
+    let x: u64 = msg as u64;
+    let y: u64 = EXP;
+    let m: u64 = key;
 
-// }
+    modexp(x, y, m)
+}
 
 
-// /// Decrypt the cipertext `msg` using the RSA private `key`
-// /// and return the resulting plaintext.
-// pub fn decrypt(key: (u32, u32), msg: u64) {
+/// Decrypt the cipertext `msg` using the RSA private `key`
+/// and return the resulting plaintext.
+pub fn decrypt(key: (u32, u32), msg: u64) {
     
-// }
+}
 
 
 
