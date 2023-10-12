@@ -9,8 +9,36 @@ use std::cell::RefCell;
     }
 
 fn main() {
-    
+    //pattern matching
+    /*
+    Two kinds: "refutable" and "irrefutable"
+    'let' requires irrefutable pattern
+    'match' allows refutable pattern, but all possible values must be matched
+ */
+     struct Point {
+        x: i64,
+        y: i64,
+    }
 
+    let mut  p = Point{x: 3, y: 5};
+    let z = match p {//Compiler checks that every possible value will be matched, and that later matches are not subsumed by earlier
+        Point{x: 3, y: 5} => {
+            println!("is good");
+            8
+        }
+        _ => {
+            panic!("bad point");
+        }
+    };
+//Rules for move/borrow are the same for pattern variables
+//For convenience, you can modify a pattern variable with ref or ref mut to have it borrowed instead of moved
+    match p {
+        Point {ref mut x, ..} => *x = 3,
+        _ => (),
+    }
+    println!("{}",p.x);
+
+    
     //enum
     /* 
     pub enum Option<T> {
