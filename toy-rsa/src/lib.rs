@@ -47,7 +47,7 @@ pub fn decrypt(key: (u32, u32), msg: u64) -> u32 {
     let d = modinverse(EXP, lambda);
 
     //for ciphertext msg, msg^d mod(n) where n = p * q
-    let decrypted_msg = modexp(msg, d, u64::from(p) * u64::from(q)); //returns a u64
+    let decrypted_msg = modexp(msg, d,p*q); //returns a u64
 
     decrypted_msg as u32
 }
