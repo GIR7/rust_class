@@ -53,3 +53,16 @@ Right if intent is for 'pop()' to be a "total function" */
       let n: i64 = s.parse()?;//if it fails, still returns Results instead of panic like unwrap()
       Ok(n < 0)
   }
+
+
+//crates - binary crates & library crate
+//pub mod dir/filename //-module, also easy to make the sub module
+//scope control - name space 
+
+/*Versioning and Semantic Versioning (SemVer):
+Crates typically follow the principles of Semantic Versioning (SemVer),
+ which includes version numbers like 1.2.3, 
+ where the major version may change for breaking changes, 
+ minor versions for backwards-compatible additions, 
+ and patch versions for backwards-compatible bug fixes. 
+ */
