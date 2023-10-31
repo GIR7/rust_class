@@ -14,9 +14,40 @@ Closures in Rust are mostly first-class, and can access parameters and locals li
 Syntax has wacky pipes and stuff; types are optional and inferred
   */
 
-/*
+/*Iterator - trait
+Produces a sequence of Option<Item> values on calls to its next() method - when next() returns null, its empty
 
+Iterator Adapters
+Implementation of Iterator() that operates by consuming the output of some passed iterator; essentially iterators over iterators
+
+FromIterator
+Trait used by collect() to make an iterator into a collection
+let v:Vec<i32> = vec![1,2,4];
+let w:Vec<i32> = v.into_iter().map(|v| v+1).collect(); //- into_iter() consumes data, can't reused after. The iter() won't consume data
+Can implement for your collection type to make it collectible 
+
+IntoIterator
+Trait for getting a "canonical" iterator for a type
+Makes the type work with for loops
+    trait IntoIterator where Self::IntoIter::Item == Self::Item {
+        type Item;
+        type IntoIter: Iterator;
+        fn into_iter(self) -> Self::IntoIter;
+    }
+Every Iterator has a default implementation of IntoIterator, so that you can for loop over an explicit iterator
+let v:Vec<i32> = vec![1,2,4];
+for c in v{             //v gets consumed, can't used later
+    println!("{}",c);
+} 
+do this instead:
+for &c in &v{     //OR - for &c in v.iter(){}
+    println!("{}",c);
+} 
  */
+
+ /*enumerate
+ An iterator that yields the current count and the element during iteration.
+  */
 fn main() {
    let y = "hello".to_string();
 
