@@ -192,3 +192,8 @@ impl TraitSalad {
   }
 }
 */
+
+/*Generics: 
+Hash example: 
+Hash<(i32,i32)>, and Has<u64> can't do the comparision like H1 == H2
+ */
