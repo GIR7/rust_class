@@ -20,4 +20,22 @@ impl Board{
             state:game_state,
         }
     }
+
+    ///prints the board 
+    //- Ref: chatgpt
+    pub fn print(&self) {
+        let max_x = self.state.iter().map(|&(x, _)| x).max().unwrap_or(0);
+        let max_y = self.state.iter().map(|&(_, y)| y).max().unwrap_or(0);
+
+        for y in (0..=max_y).rev() {
+            for x in 0..=max_x {
+                if self.state.contains(&(x, y)) {
+                    print!("O ");
+                } else {
+                    print!("X ");
+                }
+            }
+            println!();
+        }
+    }
 }
