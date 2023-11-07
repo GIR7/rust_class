@@ -4,6 +4,8 @@ use std::collections::HashSet;
 /// state field: using hashset to store the state(true-not yet eaten) of single element's index
 pub struct Board{
     state:HashSet<(usize,usize)>,
+    width: usize,
+    height: usize,
 }
 
 impl Board{
@@ -18,15 +20,17 @@ impl Board{
 
         Board{
             state:game_state,
+            width,
+            height,
         }
     }
 
-    ///prints the board 
+    ///Print a graphical representation of a board.
     //- Ref: chatgpt
     pub fn print(&self) {
-        //calculates the maximum x coordinate in the HashSet:state
+        //calculates the existing maximum x coordinate in the HashSet:state
         let max_x = self.state.iter().map(|&(x, _)| x).max().unwrap_or(0);//if empty then return 0
-        //then gets the maximum y in the hashset
+        //then gets the existing maximum y in the hashset
         let max_y = self.state.iter().map(|&(_, y)| y).max().unwrap_or(0);
 
         //loop throught the hashset and print out the state
@@ -42,8 +46,24 @@ impl Board{
         }
     }
 
-    /// This function checks the board status and to determine if the player or AI already won or lose. 
-    /// This function will be called after every move made by AI or the player
-    /// If the status of the game is already won or lose, then it will return the results of the game 
-    /// 
+    /// Chomp a given square,
+    /// removing all squares below it and to the right of it.
+    /// Panic if the input is invalid
+    pub fn chomp_squres(&mut self,x:usize,y:usize) -> Result <(), &'static str>{
+        if x < self.width && y < self.height{
+            if self.state.contains(&(x,y)){
+                for i in x..self.width{
+                    for j in y..self.height{
+                        self.state.remove(&(i,j));
+                    }
+                }
+                Ok(())
+            } else {
+                Err("Square has already been chomped")
+            }
+        } else {
+            Err("Invalid coordinates")
+        }
+    }
+    
 }
