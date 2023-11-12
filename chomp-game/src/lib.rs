@@ -33,13 +33,21 @@ impl Board{
         //then gets the existing maximum y in the hashset
         let max_y = self.state.iter().map(|&(_, y)| y).max().unwrap_or(0);
 
-        //loop throught the hashset and print out the state
-        for y in (0..=max_y).rev() {//print it from the top of the grid
+        // Print the x-axis labels
+        print!("   ");
+        for x in 0..=max_x {
+            print!("{: <3}", x);
+        }
+        println!();
+
+        // Print the y-axis labels and the board state
+        for y in (0..=max_y).rev(){
+            print!("{: <3}", max_y - y);
             for x in 0..=max_x {
-                if self.state.contains(&(x, y)) {
-                    print!("O ");
+                if self.state.contains(&(x, max_y - y)) {
+                    print!(" O ");
                 } else {
-                    print!("X ");
+                    print!(" X ");
                 }
             }
             println!();
@@ -49,14 +57,17 @@ impl Board{
     /// Chomp a given square,
     /// removing all squares below it and to the right of it.
     /// Panic if the input is invalid
-    pub fn chomp_squres(&mut self,x:usize,y:usize) -> Result <(), &'static str>{
-        if x < self.width && y < self.height{
-            if self.state.contains(&(x,y)){
-                for i in x..self.width{
-                    for j in y..self.height{
-                        self.state.remove(&(i,j));
-                    }
+    pub fn chomp_squares(&mut self,x:usize,y:usize) -> Result <(), &'static str>{
+        // Make sure the input is within the board size
+    if x < self.width && y < self.height {
+        // Then make sure the square can still be chomped
+        if self.state.contains(&(x, y)) {
+            // Remove all squares
+            for i in x..self.width {
+                for j in y..self.height {
+                    self.state.remove(&(i, j));
                 }
+            }
                 Ok(())
             } else {
                 Err("Square has already been chomped")
