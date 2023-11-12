@@ -26,28 +26,24 @@ impl Board{
     }
 
     ///Print a graphical representation of a board.
-    //- Ref: chatgpt
     pub fn print(&self) {
-        //calculates the existing maximum x coordinate in the HashSet:state
-        let max_x = self.state.iter().map(|&(x, _)| x).max().unwrap_or(0);//if empty then return 0
-        //then gets the existing maximum y in the hashset
-        let max_y = self.state.iter().map(|&(_, y)| y).max().unwrap_or(0);
-
         // Print the x-axis labels
-        print!("   ");
-        for x in 0..=max_x {
+        print!("    ");
+        for x in 0..self.width {
             print!("{: <3}", x);
         }
         println!();
 
-        // Print the y-axis labels and the board state
-        for y in (0..=max_y).rev(){
-            print!("{: <3}", max_y - y);
-            for x in 0..=max_x {
-                if self.state.contains(&(x, max_y - y)) {
-                    print!(" O ");
-                } else {
+       
+        for y in (0..self.height) {
+            //Print the x-axis labels
+            print!("{: <3}", y);
+            //Print representation
+            for x in 0..self.width {
+                if self.state.contains(&(x, y)) {
                     print!(" X ");
+                } else {
+                    print!(" O ");
                 }
             }
             println!();
