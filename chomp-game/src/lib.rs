@@ -27,16 +27,15 @@ impl Board{
 
     ///Print a graphical representation of a board.
     pub fn print(&self) {
-        // Print the x-axis labels
+        // Print the x axis labels
         print!("    ");
         for x in 0..self.width {
             print!("{: <3}", x);
         }
         println!();
 
-       
-        for y in (0..self.height) {
-            //Print the x-axis labels
+        for y in 0..self.height {
+            //Print the y axis labels
             print!("{: <3}", y);
             //Print representation
             for x in 0..self.width {
@@ -73,4 +72,8 @@ impl Board{
         }
     }
     
+    pub fn check_winning(&self) ->bool{
+        //if the board only have the one top left square
+        self.state.len() == 1 && self.state.contains(&(0,0))
+    }
 }
